@@ -29,7 +29,7 @@ DEVICE_PACKAGE_OVERLAYS := \
 
 PRODUCT_PROPERTY_OVERRIDES := \
     wifi.interface=wlan0 \
-    wifi.supplicant_scan_interval=15 \
+    wifi.supplicant_scan_interval=30 \
     tf.enable=y \
     drm.service.enabled=true
 
@@ -107,7 +107,7 @@ PRODUCT_PACKAGES += \
     liboverlay \
     libqdutils \
     libtilerenderer \
-    libI420colorconvert
+    libc2dcolorconvert 
 
 # Audio
 PRODUCT_PACKAGES += \
@@ -131,7 +131,7 @@ PRODUCT_PACKAGES += \
 	
 # Device specific settings
 PRODUCT_PACKAGES += \
-     MediapadSettings \
+     MediapadSettings
 
 # GPS
 PRODUCT_PACKAGES += \
@@ -227,7 +227,6 @@ PRODUCT_COPY_FILES += \
 
 # Some misc configuration files
 PRODUCT_COPY_FILES += \
-    device/huawei/hws7300u/prebuilt/etc/audio_policy.conf:system/etc/audio_policy.conf \
     device/huawei/hws7300u/prebuilt/etc/vold.fstab:system/etc/vold.fstab \
     device/huawei/hws7300u/prebuilt/usr/idc/t1320.idc:system/usr/idc/t1320.idc \
     device/huawei/hws7300u/prebuilt/usr/idc/s7020.idc:system/usr/idc/s7020.idc
@@ -241,20 +240,22 @@ PRODUCT_COPY_FILES += \
 # Custom media config
 PRODUCT_COPY_FILES += \
     device/huawei/hws7300u/prebuilt/etc/media_profiles.xml:system/etc/media_profiles.xml \
-    device/huawei/hws7300u/prebuilt/etc/media_codecs.xml:system/etc/media_codecs.xml
+    device/huawei/hws7300u/prebuilt/etc/media_codecs.xml:system/etc/media_codecs.xml \
+    device/huawei/hws7300u/prebuilt/etc/audio_effects.conf:system/etc/audio_effects.conf \
+    device/huawei/hws7300u/prebuilt/etc/audio_policy.conf:system/etc/audio_policy.conf
 
-# Auto loading of gamepad modules
+# Auto loading of gamepad modules	
 PRODUCT_COPY_FILES += \
     device/huawei/hws7300u/prebuilt/etc/init.d/01x360ctrlr:system/etc/init.d/01x360ctrlr
 
-## misc
+# Misc
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.setupwizard.enable_bypass=1 \
     dalvik.vm.lockprof.threshold=500 \
     ro.com.google.locationfeatures=1 \
     dalvik.vm.dexopt-flags=m=y
 
-# proprietary side of the device
+# Proprietary side of the device
 $(call inherit-product-if-exists, vendor/huawei/hws7300u/hws7300u-vendor.mk)
 
 # We have enough storage space to hold precise GC data
